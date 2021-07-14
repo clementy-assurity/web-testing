@@ -59,10 +59,10 @@ public class TradeMeTest {
     public void testCheese() throws Exception {
         resultsPage = homePage.searchForGold();
         Thread.sleep(5000);
-        WebElement numResults = resultsPage.getTotalCount();
+        String numResults = resultsPage.getTotalCount();
         WebElement topPrice = driver.findElement(By.cssSelector("#SuperGridGallery_BucketList_ClassifiedPrice_listingClassifiedPriceAmountPoa"));
         WebElement listViewButton = driver.findElement(By.cssSelector("#ListingViewBar_listViewTab_icon_a > img"));
-        System.out.println("Number of search results: " + numResults.getText());
+        System.out.println("Number of search results: " + numResults);
         System.out.println("Top result price: " + topPrice.getText());
         Thread.sleep(5000);
         listViewButton.click();
