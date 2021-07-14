@@ -1,20 +1,21 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.HomePage;
 
-import java.sql.SQLOutput;
-import java.util.Iterator;
+import pages.HomePage;
+import pages.ResultsPage;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TradeMeTest {
 
     private WebDriver driver;
-    private HomePage homepage;
+    private HomePage homePage;
+    private ResultsPage resultsPage;
 
     @BeforeAll
     private static void setUpClass() {
@@ -31,13 +33,14 @@ public class TradeMeTest {
 
     @BeforeEach
     private void setUpBrowser() {
-        homepage = new HomePage();
         setupChromeDriver();
+        homePage = new HomePage(driver);
     }
 
     private void setupChromeDriver() {
         driver = new ChromeDriver();
         driver.get("https://www.tmsandbox.co.nz/");
+
     }
 
     @AfterEach
@@ -54,9 +57,9 @@ public class TradeMeTest {
 
     @Test
     public void testCheese() throws Exception {
-        searchForGold();
+        resultsPage = homePage.searchForGold();
         Thread.sleep(5000);
-        WebElement numResults = driver.findElement(By.cssSelector("#totalCount"));
+        WebElement numResults = resultsPage.getTotalCount();
         WebElement topPrice = driver.findElement(By.cssSelector("#SuperGridGallery_BucketList_ClassifiedPrice_listingClassifiedPriceAmountPoa"));
         WebElement listViewButton = driver.findElement(By.cssSelector("#ListingViewBar_listViewTab_icon_a > img"));
         System.out.println("Number of search results: " + numResults.getText());
@@ -84,12 +87,4 @@ public class TradeMeTest {
         }
     }
 
-    private void searchForGold() {
-        WebElement queryBox = driver.findElement(By.cssSelector("#searchString"));
-        queryBox.sendKeys("gold");
-        // queryBox.sendKeys(Keys.RETURN);
-        // queryBox.submit();
-        WebElement submitButton = driver.findElement(By.cssSelector("#generalSearch > div.field.field-right > button"));
-        submitButton.click();
-    }
 }
