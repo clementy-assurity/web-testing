@@ -22,7 +22,6 @@ public class TradeMeSteps {
     @Given("I am conducting a TradeMe search")
     public void i_am_conducting_a_trade_me_search() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
         ChromeOptions options = new ChromeOptions();
         if (("true").equals(System.getenv("HEADLESS_CHROME"))) {
             options.addArguments("--headless");
