@@ -26,5 +26,5 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew cucumber
       
-env:
-    HEADLESS_CHROME: true
+      env:
+        HEADLESS_CHROME: true
