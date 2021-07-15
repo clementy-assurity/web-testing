@@ -40,7 +40,6 @@ public class TradeMeTest {
     private void setupChromeDriver() {
         driver = new ChromeDriver();
         driver.get("https://www.tmsandbox.co.nz/");
-
     }
 
     @AfterEach
@@ -57,9 +56,9 @@ public class TradeMeTest {
 
     @Test
     public void testCheese() throws Exception {
-        resultsPage = homePage.searchForGold();
+        resultsPage = homePage.searchForGold("gold");
         Thread.sleep(5000);
-        String numResults = resultsPage.getTotalCount();
+        int numResults = resultsPage.getTotalCount();
         WebElement topPrice = driver.findElement(By.cssSelector("#SuperGridGallery_BucketList_ClassifiedPrice_listingClassifiedPriceAmountPoa"));
         WebElement listViewButton = driver.findElement(By.cssSelector("#ListingViewBar_listViewTab_icon_a > img"));
         System.out.println("Number of search results: " + numResults);

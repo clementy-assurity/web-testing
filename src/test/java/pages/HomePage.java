@@ -13,9 +13,9 @@ public class HomePage {
         PageFactory.initElements(driver, this);
     }
 
-    public ResultsPage searchForGold() {
+    public ResultsPage searchForGold(String searchString) {
         WebElement queryBox = driver.findElement(By.cssSelector("#searchString"));
-        queryBox.sendKeys("gold");
+        queryBox.sendKeys(searchString);
         WebElement submitButton = driver.findElement(By.cssSelector("#generalSearch > div.field.field-right > button"));
         submitButton.click();
         return new ResultsPage(driver);
